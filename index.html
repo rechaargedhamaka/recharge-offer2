@@ -135,7 +135,7 @@
       Jio: ["₹209 - 22 Days - 1GB/day", "₹239 - 22 Days - 1.5GB/day", "₹299 - 28 Days - 1.5GB/day"],
       Airtel: ["₹349 - 28 Days - 1.5GB/day", "₹299 - 28 Days - 1GB/day"],
       Vi: ["₹299 - 28 Days - 1.5GB/day", "₹359 - 28 Days - 3GB/day"],
-      BSNL: ["₹187 - 28 Days - 2GB/day", "₹397 - 60 Days - 2GB/day"]
+      BSNL: ["₹187 - 28 Days - 1.5GB/day", "₹397 - 60 Days - 2GB/day"]
     };
 
     function selectSim(name, el) {
@@ -200,7 +200,7 @@
         const plan = document.getElementById("planSelect").value;
         const message = `Recharge Request:\nNumber: ${mobile}\nOperator: ${selectedSim}\nPlan: ${plan}\nUTR: ${utr}`;
         const encodedMessage = encodeURIComponent(message);
-        window.location.href = `https://wa.me/6307536245?text=${encodedMessage}`;
+        window.location.href = `https://wa.me/9628119881?text=${encodedMessage}`;
       }, 1500);
     }
   </script>
