@@ -1,239 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Recharge Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blinkit Style Recharge</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #1e1e1e, #333);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+    }
+    header {
+      background: linear-gradient(90deg, #ffe259, #ffa751);
+      padding: 15px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
     }
     .container {
-      max-width: 600px;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      animation: fadeIn 1s ease;
-      text-align: center;
+      padding: 20px;
     }
-    h1 {
-      font-size: 30px;
-      color: #00e676;
-      margin-bottom: 20px;
+    .card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
-    input[type="text"], select {
+    .card label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+      color: #444;
+    }
+    .card input, .card select {
       width: 100%;
       padding: 12px;
-      font-size: 16px;
-      border: none;
+      border: 1px solid #ddd;
       border-radius: 10px;
-      margin-bottom: 20px;
-      outline: none;
-    }
-    .sims {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 20px;
-    }
-    .sim {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .sim img { width: 40px; }
-    .sim:hover { transform: scale(1.1); }
-    .selected { border: 3px solid #00e676; }
-    .btn {
-      width: 50%;
-      padding: 10px;
-      background-color: #00e676;
-      color: black;
       font-size: 16px;
+    }
+    .recharge-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      padding: 15px;
+      background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
       border: none;
       border-radius: 50px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
       cursor: pointer;
-      transition: background 0.3s ease;
     }
-    .btn:hover { background-color: #00c853; }
-    .status {
-      font-size: 22px;
-      font-weight: bold;
-      margin-top: 20px;
-      transition: color 0.5s ease;
-    }
-    .pending { color: orange; }
-    .success {
-      color: #00e676;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .checkmark {
-      font-size: 50px;
-      margin-bottom: 10px;
-      animation: pop 0.5s ease forwards;
-      border-radius: 50%;
-      background: #00e676;
-      color: black;
-      padding: 10px 14px;
-    }
-    @keyframes pop {
-      0% { transform: scale(0); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .recharge-btn:hover {
+      opacity: 0.9;
     }
   </style>
 </head>
 <body>
+  <header>Recharge Portal</header>
+  <div class="container">
+    <div class="card">
+      <label>Enter Mobile Number</label>
+      <input type="text" id="mobile" placeholder="Enter mobile number" />
+    </div><div class="card">
+  <label>Select Operator</label>
+  <select id="operator" onchange="loadPlans()">
+    <option value="">-- Select --</option>
+    <option value="Jio">Jio</option>
+    <option value="Airtel">Airtel</option>
+    <option value="Vi">Vi</option>
+    <option value="BSNL">BSNL</option>
+  </select>
+</div>
 
-  <div class="container" id="formContainer">
-    <h1>Recharge Now</h1>
-    <input type="text" id="mobileNumber" placeholder="Enter Mobile Number" maxlength="10"/>
-    <div class="sims">
-      <div class="sim" onclick="selectSim('Jio', this)">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Reliance_Jio_Logo_%28October_2015%29.svg/2048px-Reliance_Jio_Logo_%28October_2015%29.svg.png" alt="Jio"/>
-      </div>
-      <div class="sim" onclick="selectSim('Airtel', this)">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Airtel_logo-01.png/1200px-Airtel_logo-01.png" alt="Airtel"/>
-      </div>
-      <div class="sim" onclick="selectSim('Vi', this)">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyU3IkQVfj8_FiAbRlB_D1bKLjy1lBuw-6Zw&s" alt="Vi"/>
-      </div>
-      <div class="sim" onclick="selectSim('BSNL', this)">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWxOPO6k59eC4J3QWDGDkgO0JCoQ80PogdBA&s" alt="BSNL"/>
-      </div>
-    </div>
-    <select id="planSelect" onchange="updateQRCode()"><option value="">Select Plan</option></select>
-    <button class="btn" onclick="recharge()">Recharge Now</button>
-  </div>
+<div class="card">
+  <label>Select SIM</label>
+  <select id="sim">
+    <option value="">-- Select --</option>
+    <option value="Prepaid">Prepaid</option>
+    <option value="Postpaid">Postpaid</option>
+  </select>
+</div>
 
-  <div class="container" id="paymentContainer" style="display:none;">
-    <h1>Scan to Pay</h1>
-    <div class="qr">
-      <img id="qrCode" src="" alt="QR Code">
-    </div>
-    <input type="text" id="utrInput" placeholder="Enter UTR number"/>
-    <br><br>
-    <button class="btn" style="width: 30%;" onclick="submitUTR()">Submit</button>
-    <div class="status pending" id="paymentStatus">Payment Pending...</div>
-  </div>
+<div class="card">
+  <label>Select Plan</label>
+  <select id="plan">
+    <option value="">-- Select operator first --</option>
+  </select>
+</div>
+
+  </div><button class="recharge-btn" onclick="rechargeNow()">Recharge Now</button>
 
   <script>
-    let selectedSim = "";
-    let selectedAmount = "100";
+    // Plans list for each operator
     const plans = {
-      Jio: ["₹209 - 22 Days - 1GB/day", "₹239 - 22 Days - 1.5GB/day", "₹299 - 28 Days - 1.5GB/day"],
-      Airtel: ["₹349 - 28 Days - 1.5GB/day", "₹299 - 28 Days - 1GB/day"],
-      Vi: ["₹299 - 28 Days - 1.5GB/day", "₹359 - 28 Days - 3GB/day"],
-      BSNL: ["₹187 - 28 Days - 1.5GB/day", "₹397 - 60 Days - 2GB/day"]
+      "Jio": ["₹199 - 28 Days", "₹399 - 56 Days", "₹666 - 84 Days"],
+      "Airtel": ["₹249 - 28 Days", "₹479 - 56 Days", "₹839 - 84 Days"],
+      "Vi": ["₹219 - 28 Days", "₹459 - 56 Days", "₹699 - 84 Days"],
+      "BSNL": ["₹147 - 28 Days", "₹399 - 56 Days", "₹699 - 84 Days"]
     };
 
-    function selectSim(name, el) {
-      selectedSim = name;
-      document.querySelectorAll(".sim").forEach(sim => sim.classList.remove("selected"));
-      el.classList.add("selected");
+    function loadPlans(){
+      let operator = document.getElementById('operator').value;
+      let planSelect = document.getElementById('plan');
+      planSelect.innerHTML = "";
 
-      const planSelect = document.getElementById("planSelect");
-      planSelect.innerHTML = `<option value="">Select Plan</option>`;
-      plans[name].forEach(plan => {
-        const option = document.createElement("option");
-        option.text = plan;
-        option.value = plan;
-        planSelect.appendChild(option);
-      });
+      if(operator && plans[operator]){
+        plans[operator].forEach(plan => {
+          let opt = document.createElement("option");
+          opt.value = plan;
+          opt.textContent = plan;
+          planSelect.appendChild(opt);
+        });
+      } else {
+        let opt = document.createElement("option");
+        opt.value = "";
+        opt.textContent = "-- Select operator first --";
+        planSelect.appendChild(opt);
+      }
     }
 
-    function updateQRCode() {
-      const plan = document.getElementById("planSelect").value;
-      selectedAmount = plan.match(/\u20B9(\d+)/)?.[1] || "100";
-    }
+    function rechargeNow(){
+      let mobile = document.getElementById('mobile').value;
+      let operator = document.getElementById('operator').value;
+      let sim = document.getElementById('sim').value;
+      let plan = document.getElementById('plan').value;
 
-    function recharge() {
-      const mobile = document.getElementById("mobileNumber").value;
-      const plan = document.getElementById("planSelect").value;
-
-      if (!mobile || mobile.length !== 10) {
-        alert("Please enter a valid 10-digit mobile number.");
-        return;
-      }
-      if (!selectedSim) {
-        alert("Please select an operator.");
-        return;
-      }
-      if (!plan) {
-        alert("Please select a plan.");
+      if(!mobile || !operator || !sim || !plan){
+        alert("Please fill all fields");
         return;
       }
 
-      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=9648618982@upi&pn=RechargePortal&am=${selectedAmount}&cu=INR`;
-      document.getElementById("qrCode").src = qrUrl;
+      let orderNo = "ORD" + Math.floor(Math.random()*1000000);
+      let message = `📱 Recharge Request\n\nMobile: ${mobile}\nOperator: ${operator}\nSIM: ${sim}\nPlan: ${plan}\nOrder No: ${orderNo}`;
 
-      document.getElementById("formContainer").style.display = "none";
-      document.getElementById("paymentContainer").style.display = "block";
+      // WhatsApp link with 91 prefix
+      let whatsappNumber = "916307536245";
+      let url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+      window.open(url, '_blank');
     }
-
-    // Telegram Bot Config
-    const botToken = "7357591032:AAEWot08vTtNlDr4_u6S1THjnglBX_WhFdk";
-    const chatId = "7063861675";
-
-    const sendToTelegram = async (message) => {
-      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-      await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: message,
-        }),
-      });
-    };
-
-    async function submitUTR() {
-      const utr = document.getElementById("utrInput").value.trim();
-
-      if (!utr) {
-        alert("Please enter a valid UTR number.");
-        return;
-      }
-
-      const statusDiv = document.getElementById("paymentStatus");
-      statusDiv.className = "status success";
-      statusDiv.innerHTML = `<div class='checkmark'>✅</div>Payment Successful`;
-
-      setTimeout(async () => {
-        const mobile = document.getElementById("mobileNumber").value;
-        const plan = document.getElementById("planSelect").value;
-
-        const message = `📲 Recharge Request
-🔢 Mobile: ${mobile}
-📡 Operator: ${selectedSim}
-💰 Plan: ${plan}
-🔁 UTR: ${utr}`;
-
-        await sendToTelegram(message);
-        alert("Details sent to Telegram successfully!");
-      }, 1500);
-    }
-  </script>
-</body>
+  </script></body>
 </html>
+
 
