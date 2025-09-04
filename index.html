@@ -1,107 +1,192 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blinkit Style Recharge</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Segoe UI", sans-serif;
       margin: 0;
-      background: #f9f9f9;
+      background: #fdfcff;
+      color: #2d2d2d;
     }
+
+    /* 🔥 Banner Slider */
+    .banner-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      height: 180px;
+    }
+    .banner-slider {
+      display: flex;
+      width: 400%; /* 4 banners */
+      animation: slide 16s infinite;
+    }
+    .banner-slide {
+      width: 100%;
+      flex-shrink: 0;
+      height: 180px;
+    }
+    .banner-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-bottom: 3px solid #6a11cb;
+    }
+
+    @keyframes slide {
+      0%   {transform: translateX(0);}
+      20%  {transform: translateX(0);}     
+      25%  {transform: translateX(-100%);} 
+      45%  {transform: translateX(-100%);} 
+      50%  {transform: translateX(-200%);} 
+      70%  {transform: translateX(-200%);} 
+      75%  {transform: translateX(-300%);} 
+      95%  {transform: translateX(-300%);} 
+      100% {transform: translateX(0);}
+    }
+
     header {
-      background: linear-gradient(90deg, #ffe259, #ffa751);
-      padding: 15px;
+      background: linear-gradient(135deg, #6a11cb, #00b09b);
+      padding: 18px;
       text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-      color: #333;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     }
     .container {
       padding: 20px;
+      max-width: 480px;
+      margin: auto;
     }
     .card {
       background: #fff;
-      border-radius: 15px;
-      padding: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
     }
     .card label {
-      font-weight: bold;
+      font-weight: 600;
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
       color: #444;
     }
     .card input, .card select {
       width: 100%;
-      padding: 12px;
+      padding: 12px 14px;
       border: 1px solid #ddd;
-      border-radius: 10px;
-      font-size: 16px;
+      border-radius: 12px;
+      font-size: 15px;
+      outline: none;
     }
     .recharge-btn {
       position: fixed;
-      bottom: 20px;
+      bottom: 22px;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
-      padding: 15px;
-      background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+      padding: 16px;
+      background: linear-gradient(135deg, #6a11cb, #00b09b);
       color: white;
       font-size: 18px;
       font-weight: bold;
       border: none;
       border-radius: 50px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
       cursor: pointer;
+      transition: 0.3s;
     }
     .recharge-btn:hover {
-      opacity: 0.9;
+      opacity: 0.92;
+      transform: translateX(-50%) scale(1.03);
     }
   </style>
 </head>
 <body>
-  <header>Recharge Portal</header>
+
+  <!-- 🔥 Banner Slider -->
+  <div class="banner-container">
+    <div class="banner-slider">
+      <div class="banner-slide"><img src="https://via.placeholder.com/1200x180/6a11cb/ffffff?text=Recharge+Offer+1" alt="Banner 1"></div>
+      <div class="banner-slide"><img src="https://via.placeholder.com/1200x180/00b09b/ffffff?text=Recharge+Offer+2" alt="Banner 2"></div>
+      <div class="banner-slide"><img src="https://via.placeholder.com/1200x180/fd5e53/ffffff?text=Recharge+Offer+3" alt="Banner 3"></div>
+      <div class="banner-slide"><img src="https://via.placeholder.com/1200x180/ff9800/ffffff?text=Recharge+Offer+4" alt="Banner 4"></div>
+    </div>
+  </div>
+
+  <header>Recharge Portal ⚡</header>
+
   <div class="container">
     <div class="card">
-      <label>Enter Mobile Number</label>
+      <label>📱 Enter Mobile Number</label>
       <input type="text" id="mobile" placeholder="Enter mobile number" />
-    </div><div class="card">
-  <label>Select Operator</label>
-  <select id="operator" onchange="loadPlans()">
-    <option value="">-- Select --</option>
-    <option value="Jio">Jio</option>
-    <option value="Airtel">Airtel</option>
-    <option value="Vi">Vi</option>
-    <option value="BSNL">BSNL</option>
-  </select>
-</div>
+    </div>
 
-<div class="card">
-  <label>Select SIM</label>
-  <select id="sim">
-    <option value="">-- Select --</option>
-    <option value="Prepaid">Prepaid</option>
-  </select>
-</div>
+    <div class="card">
+      <label>📶 Select Operator</label>
+      <select id="operator" onchange="loadPlans()">
+        <option value="">-- Select --</option>
+        <option value="Jio">Jio</option>
+        <option value="Airtel">Airtel</option>
+        <option value="Vi">Vi</option>
+        <option value="BSNL">BSNL</option>
+      </select>
+    </div>
 
-<div class="card">
-  <label>Select Plan</label>
-  <select id="plan">
-    <option value="">-- Select operator first --</option>
-  </select>
-</div>
+    <div class="card">
+      <label>💳 Select SIM</label>
+      <select id="sim">
+        <option value="">-- Select --</option>
+        <option value="Prepaid">Prepaid</option>
+      </select>
+    </div>
 
-  </div><button class="recharge-btn" onclick="rechargeNow()">Recharge Now</button>
+    <div class="card">
+      <label>📦 Select Plan</label>
+      <select id="plan">
+        <option value="">-- Select operator first --</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="recharge-btn" onclick="rechargeNow()">Recharge Now</button>
 
   <script>
-    // Plans list for each operator
+    // ✅ आपके पहले दिए गए exact recharge plans
     const plans = {
-      "Jio": ["₹239 - 22 Days - 1.5Gb/Days", "₹299 - 28 Days - 1.5Gb/Days" , "₹349 - 28 Days - 5g unlimited + 2Gb/Day" ,"₹629 - 56 Days - unlimited 5g + 2Gb/day" ,"₹859 - 84 days - 5g unlimited + 2Gb/day" ,"₹889 - 84Days - 1.5Gb/Day"],
-      "Airtel": ["₹199 - 28 Days - 2.0gb/pack", "₹299 - 28 Days - 1.0gb/day" , "₹349 - 28 Days - 1.5gb/day" ,"₹379 - 1 month - 5g unlimited + 2.0Gb/day" ,"₹649 - 56 days - 5g unlimited - 2.0Gb/day"],
-      "Vi": ["₹199 - 28 Days - 2.0Gb/pack", "₹299 - 28 Days - 1.0Gb/day", "₹349 - 28 Days - 1.5gb/day" ,"₹649 - 56 Days - 2.0Gb/day + 5g unlimited"],
-      "BSNL": ["₹199 - 28 Days - unlimited(2Gb/day)", "₹1999 - 365 Days - unlimited(1.5Gb/day"]
+      "Jio": [
+        "₹239 - 22 Days - 1.5Gb/Day",
+        "₹299 - 28 Days - 1.5Gb/Day",
+        "₹349 - 28 Days - 5G Unlimited + 2Gb/Day",
+        "₹629 - 56 Days - 5G Unlimited + 2Gb/Day",
+        "₹859 - 84 Days - 5G Unlimited + 2Gb/Day",
+        "₹889 - 84 Days - 1.5Gb/Day"
+      ],
+      "Airtel": [
+        "₹199 - 28 Days - 2.0Gb/Pack",
+        "₹299 - 28 Days - 1.0Gb/Day",
+        "₹349 - 28 Days - 1.5Gb/Day",
+        "₹379 - 1 Month - 5G Unlimited + 2.0Gb/Day",
+        "₹649 - 56 Days - 5G Unlimited - 2.0Gb/Day"
+      ],
+      "Vi": [
+        "₹199 - 28 Days - 2.0Gb/Pack",
+        "₹299 - 28 Days - 1.0Gb/Day",
+        "₹349 - 28 Days - 1.5Gb/Day",
+        "₹649 - 56 Days - 2.0Gb/Day + 5G Unlimited"
+      ],
+      "BSNL": [
+        "₹199 - 28 Days - Unlimited (2Gb/Day)",
+        "₹1999 - 365 Days - Unlimited (1.5Gb/Day)"
+      ]
     };
 
     function loadPlans(){
@@ -125,27 +210,24 @@
     }
 
     function rechargeNow(){
-      let mobile = document.getElementById('mobile').value;
+      let mobile = document.getElementById('mobile').value.trim();
       let operator = document.getElementById('operator').value;
       let sim = document.getElementById('sim').value;
       let plan = document.getElementById('plan').value;
 
       if(!mobile || !operator || !sim || !plan){
-        alert("Please fill all fields");
+        alert("⚠️ Please fill all fields");
         return;
       }
 
       let orderNo = "ORD" + Math.floor(Math.random()*1000000);
-      let message = `📱 Recharge Request\n\nMobile: ${mobile}\nOperator: ${operator}\nSIM: ${sim}\nPlan: ${plan}\nOrder No: ${orderNo}`;
+      let message = `📱 Recharge Request\n\nMobile: ${mobile}\nOperator: ${operator}\nSIM: ${sim}\nPlan: ${plan}\n🆔 Order No: ${orderNo}`;
 
-      // WhatsApp link with 91 prefix
-      let whatsappNumber = "916307536245";
+      let whatsappNumber = "916307536245"; // आपका WhatsApp नंबर
       let url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
       window.open(url, '_blank');
     }
-  </script></body>
+  </script>
+</body>
 </html>
-
-
-
