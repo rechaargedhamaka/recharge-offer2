@@ -1,241 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blink pay</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon Voucher</title>
   <style>
     body {
-      font-family: "Segoe UI", sans-serif;
       margin: 0;
-      background: #fdfcff;
-      color: #2d2d2d;
-    }
-
-    /* 🔥 Banner Slider */
-    .banner-container {
-      width: 100%;
-      overflow: hidden;
+      padding: 0;
+      height: 100vh;
+      width: 100vw;
+      font-family: Arial, sans-serif;
       position: relative;
-      height: 180px;
-    }
-    .banner-slider {
-      display: flex;
-      width: 400%; /* 4 banners */
-      animation: slide 16s infinite;
-    }
-    .banner-slide {
-      width: 100%;
-      flex-shrink: 0;
-      height: 180px;
-    }
-    .banner-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-bottom: 3px solid #6a11cb;
     }
 
-    @keyframes slide {
-      0%   {transform: translateX(0);}
-      20%  {transform: translateX(0);}     
-      25%  {transform: translateX(-100%);} 
-      45%  {transform: translateX(-100%);} 
-      50%  {transform: translateX(-200%);} 
-      70%  {transform: translateX(-200%);} 
-      75%  {transform: translateX(-300%);} 
-      95%  {transform: translateX(-300%);} 
-      100% {transform: translateX(0);}
+    /* Main Screen */
+    #main-screen {
+      height: 100vh;
+      width: 100vw;
+      background: url("https://i.ibb.co/jkFfJpdv/Picsart-25-09-06-13-28-32-508.jpg") no-repeat center center;
+      background-size: cover;
+      position: relative;
     }
 
-    header {
-      background: linear-gradient(135deg, #6a11cb, #00b09b);
-      padding: 18px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: 1px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    }
-    .container {
-      padding: 20px;
-      max-width: 480px;
-      margin: auto;
-    }
-    .card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 16px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
-    }
-    .card label {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 6px;
-      color: #444;
-    }
-    .card input, .card select {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      font-size: 15px;
-      outline: none;
-    }
-    .recharge-btn {
-      position: fixed;
-      bottom: 22px;
+    .input-box {
+      position: absolute;
+      top: 54%;
       left: 50%;
       transform: translateX(-50%);
-      width: 90%;
-      padding: 16px;
-      background: linear-gradient(135deg, #6a11cb, #00b09b);
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      border: none;
-      border-radius: 50px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
-      cursor: pointer;
-      transition: 0.3s;
+      width: 70%;
+      padding: 12px;
+      border: 2px solid #00e6ff;
+      border-radius: 6px;
+      font-size: 16px;
+      text-align: center;
+      background: white;
     }
-    .recharge-btn:hover {
-      opacity: 0.92;
-      transform: translateX(-50%) scale(1.03);
+
+    .generate-btn {
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      padding: 12px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    /* Voucher Screen */
+    #voucher-screen {
+      display: none;
+      height: 100vh;
+      width: 100vw;
+      background: url("https://i.ibb.co/sJHNW4tw/Picsart-25-09-06-13-27-55-497.png") no-repeat center center;
+      background-size: cover;
+      position: relative;
+    }
+
+    .voucher-code {
+      position: absolute;
+      top: 48%; /* red line की जगह */
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 22px;
+      font-weight: bold;
+      color: #000;
+      letter-spacing: 3px;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 60%; /* orange rectangle के बीच */
+      left: 50%;
+      transform: translateX(-50%);
+      background: none;
+      border: none;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 35px;
+      font-weight: bold;
+      color: #000;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-
-  <!-- 🔥 Banner Slider -->
-  <div class="banner-container">
-    <div class="banner-slider">
-      <div class="banner-slide"><img src="https://i.ibb.co/zvRK7S8/Picsart-25-09-04-12-52-40-166.jpg/1556x423/6a11cb/ffffff?text=Recharge+Offer+1" alt="Banner 1"></div>
-      <div class="banner-slide"><img src="https://i.ibb.co/zvRK7S8/Picsart-25-09-04-12-52-40-166.jpg/1556x423/00b09b/ffffff?text=Recharge+Offer+2" alt="Banner 2"></div>
-      <div class="banner-slide"><img src="https://i.ibb.co/zvRK7S8/Picsart-25-09-04-12-52-40-166.jpg/1556x423/fd5e53/ffffff?text=Recharge+Offer+3" alt="Banner 3"></div>
-      <div class="banner-slide"><img src="https://i.ibb.co/zvRK7S8/Picsart-25-09-04-12-52-40-166.jpg/1556x423/ff9800/ffffff?text=Recharge+Offer+4" alt="Banner 4"></div>
-    </div>
+  <!-- Main Screen -->
+  <div id="main-screen">
+    <input type="number" class="input-box" placeholder="Enter Amount">
+    <a href="#" class="generate-btn" onclick="showVoucher()">Generate</a>
   </div>
 
-  <header>Recharge Portal ⚡</header>
-
-  <div class="container">
-    <div class="card">
-      <label>📱 Enter Mobile Number</label>
-      <input type="text" id="mobile" placeholder="Enter mobile number" />
-    </div>
-
-    <div class="card">
-      <label>📶 Select Operator</label>
-      <select id="operator" onchange="loadPlans()">
-        <option value="">-- Select --</option>
-        <option value="Jio">Jio</option>
-        <option value="Airtel">Airtel</option>
-        <option value="Vi">Vi</option>
-        <option value="BSNL">BSNL</option>
-      </select>
-    </div>
-
-    <div class="card">
-      <label>💳 Select SIM</label>
-      <select id="sim">
-        <option value="">-- Select --</option>
-        <option value="Prepaid">Prepaid</option>
-      </select>
-    </div>
-
-    <div class="card">
-      <label>📦 Select Plan</label>
-      <select id="plan">
-        <option value="">-- Select operator first --</option>
-      </select>
-    </div>
+  <!-- Voucher Screen -->
+  <div id="voucher-screen">
+    <span class="close-btn" onclick="closeVoucher()">×</span>
+    <div class="voucher-code" id="code"></div>
+    <button class="copy-btn" onclick="copyCode()">Copy</button>
   </div>
-
-  <button class="recharge-btn" onclick="rechargeNow()">Recharge Now</button>
 
   <script>
-    // ✅ आपके पहले दिए गए exact recharge plans
-    const plans = {
-      "Jio": [
-        "₹239 - 22 Days - 1.5Gb/Day",
-        "₹299 - 28 Days - 1.5Gb/Day",
-        "₹349 - 28 Days - 5G Unlimited + 2Gb/Day",
-        "₹629 - 56 Days - 5G Unlimited + 2Gb/Day",
-        "₹859 - 84 Days - 5G Unlimited + 2Gb/Day",
-        "₹889 - 84 Days - 1.5Gb/Day"
-      ],
-      "Airtel": [
-        "₹199 - 28 Days - 2.0Gb/Pack",
-        "₹299 - 28 Days - 1.0Gb/Day",
-        "₹349 - 28 Days - 1.5Gb/Day",
-        "₹379 - 1 Month - 5G Unlimited + 2.0Gb/Day",
-        "₹649 - 56 Days - 5G Unlimited - 2.0Gb/Day"
-      ],
-      "Vi": [
-        "₹199 - 28 Days - 2.0Gb/Pack",
-        "₹299 - 28 Days - 1.0Gb/Day",
-        "₹349 - 28 Days - 1.5Gb/Day",
-        "₹649 - 56 Days - 2.0Gb/Day + 5G Unlimited"
-      ],
-      "BSNL": [
-        "₹199 - 28 Days - Unlimited (2Gb/Day)",
-        "₹1999 - 365 Days - Unlimited (1.5Gb/Day)"
-      ]
-    };
-
-    function loadPlans(){
-      let operator = document.getElementById('operator').value;
-      let planSelect = document.getElementById('plan');
-      planSelect.innerHTML = "";
-
-      if(operator && plans[operator]){
-        plans[operator].forEach(plan => {
-          let opt = document.createElement("option");
-          opt.value = plan;
-          opt.textContent = plan;
-          planSelect.appendChild(opt);
-        });
-      } else {
-        let opt = document.createElement("option");
-        opt.value = "";
-        opt.textContent = "-- Select operator first --";
-        planSelect.appendChild(opt);
+    // Function to generate random code
+    function generateCode(length) {
+      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      let result = "";
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
       }
+      return result;
     }
 
-    function rechargeNow(){
-      let mobile = document.getElementById('mobile').value.trim();
-      let operator = document.getElementById('operator').value;
-      let sim = document.getElementById('sim').value;
-      let plan = document.getElementById('plan').value;
+    // Show voucher screen
+    function showVoucher() {
+      document.getElementById("main-screen").style.display = "none";
+      document.getElementById("voucher-screen").style.display = "block";
+      document.getElementById("code").textContent = generateCode(13); // हर बार नया code
+    }
 
-      if(!mobile || !operator || !sim || !plan){
-        alert("⚠️ Please fill all fields");
-        return;
-      }
+    // Copy code function
+    function copyCode() {
+      const code = document.getElementById("code").textContent;
+      const textarea = document.createElement("textarea");
+      textarea.value = code;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      alert("Voucher Code Copied: " + code);
+    }
 
-      let orderNo = "ORD" + Math.floor(Math.random()*1000000);
-      let message = `📱 Recharge Request\n\nMobile: ${mobile}\nOperator: ${operator}\nSIM: ${sim}\nPlan: ${plan}\n🆔 Order No: ${orderNo}`;
-
-      let whatsappNumber = "916307536245"; // आपका WhatsApp नंबर
-      let url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-
-      window.open(url, '_blank');
+    // Close voucher screen
+    function closeVoucher() {
+      document.getElementById("voucher-screen").style.display = "none";
+      document.getElementById("main-screen").style.display = "block";
     }
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
