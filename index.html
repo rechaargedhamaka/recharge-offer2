@@ -3,152 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amazon Voucher</title>
+  <title>Recharge Offer</title>
   <style>
+    /* Portrait Fixed Layout */
     body {
       margin: 0;
-      padding: 0;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
-      width: 100vw;
-      font-family: Arial, sans-serif;
-      position: relative;
     }
 
-    /* Main Screen */
-    #main-screen {
-      height: 100vh;
-      width: 100vw;
-      background: url("https://i.ibb.co/jkFfJpdv/Picsart-25-09-06-13-28-32-508.jpg") no-repeat center center;
-      background-size: cover;
-      position: relative;
+    .phone-frame {
+      width: 390px;      /* iPhone portrait width */
+      height: 844px;     /* iPhone portrait height */
+      background: #fff;
+      overflow: hidden;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
     }
 
-    .input-box {
-      position: absolute;
-      top: 54%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 70%;
-      padding: 12px;
-      border: 2px solid #00e6ff;
-      border-radius: 6px;
-      font-size: 16px;
-      text-align: center;
-      background: white;
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+    .header img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+    .header span {
+      font-size: 18px;
+      font-weight: bold;
+      color: #f44336;
     }
 
-    .generate-btn {
-      position: absolute;
-      top: 70%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 70%;
-      padding: 12px;
-      background: none;
+    /* Green Banner */
+    .banner {
+      margin: 15px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .banner img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    /* Options (side circles) */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-left: 15px;
+    }
+    .option {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .option img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Bottom Button */
+    .footer {
+      margin-top: auto;
+      padding: 15px;
+    }
+    .recharge-btn {
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
       border: none;
-      font-size: 20px;
-      font-weight: bold;
+      border-radius: 30px;
       color: #fff;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    /* Voucher Screen */
-    #voucher-screen {
-      display: none;
-      height: 100vh;
-      width: 100vw;
-      background: url("https://i.ibb.co/sJHNW4tw/Picsart-25-09-06-13-27-55-497.png") no-repeat center center;
-      background-size: cover;
-      position: relative;
-    }
-
-    .voucher-code {
-      position: absolute;
-      top: 48%; /* red line की जगह */
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 22px;
-      font-weight: bold;
-      color: #000;
-      letter-spacing: 3px;
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 60%; /* orange rectangle के बीच */
-      left: 50%;
-      transform: translateX(-50%);
-      background: none;
-      border: none;
-      font-size: 20px;
-      font-weight: bold;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 35px;
-      font-weight: bold;
-      color: #000;
+      background: linear-gradient(45deg, #ff5f6d, #ffc371);
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <!-- Main Screen -->
-  <div id="main-screen">
-    <input type="number" class="input-box" placeholder="Enter Amount">
-    <a href="#" class="generate-btn" onclick="showVoucher()">Generate</a>
+  <div class="phone-frame">
+
+    <!-- Header -->
+    <div class="header">
+      <img src="https://cdn-icons-png.flaticon.com/512/929/929422.png" alt="₹">
+      <span>RECHARGE OFFER</span>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner">
+      <img src="https://via.placeholder.com/350x160/4CAF50/ffffff?text=Offer+Banner" alt="Banner">
+    </div>
+
+    <!-- Options -->
+    <div class="options">
+      <div class="option"><img src="https://via.placeholder.com/50/9C27B0/ffffff" alt=""></div>
+      <div class="option"><img src="https://via.placeholder.com/50/FF9800/ffffff" alt=""></div>
+      <div class="option"><img src="https://via.placeholder.com/50/3F51B5/ffffff" alt=""></div>
+      <div class="option"><img src="https://via.placeholder.com/50/FFEB3B/000000" alt=""></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <button class="recharge-btn">Recharge Now</button>
+    </div>
+
   </div>
-
-  <!-- Voucher Screen -->
-  <div id="voucher-screen">
-    <span class="close-btn" onclick="closeVoucher()">×</span>
-    <div class="voucher-code" id="code"></div>
-    <button class="copy-btn" onclick="copyCode()">Copy</button>
-  </div>
-
-  <script>
-    // Function to generate random code
-    function generateCode(length) {
-      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      let result = "";
-      for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * characters.length));
-      }
-      return result;
-    }
-
-    // Show voucher screen
-    function showVoucher() {
-      document.getElementById("main-screen").style.display = "none";
-      document.getElementById("voucher-screen").style.display = "block";
-      document.getElementById("code").textContent = generateCode(13); // हर बार नया code
-    }
-
-    // Copy code function
-    function copyCode() {
-      const code = document.getElementById("code").textContent;
-      const textarea = document.createElement("textarea");
-      textarea.value = code;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-      alert("Voucher Code Copied: " + code);
-    }
-
-    // Close voucher screen
-    function closeVoucher() {
-      document.getElementById("voucher-screen").style.display = "none";
-      document.getElementById("main-screen").style.display = "block";
-    }
-  </script>
 </body>
 </html>
