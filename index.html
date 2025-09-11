@@ -27,20 +27,11 @@
       padding-bottom: 20px;
     }
 
-    /* === HEADER IMAGE === */
-    .header-img-wrap {
-      width: 100%;
-      max-width: 500px;         /* same height as old header */
-      overflow: hidden;
-    }
-    .header-img-wrap img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;     /* image fill karega rectangle */
-      display: block;
-    }
+    /* HEADER IMAGE */
+    .header-img-wrap { width: 100%; max-width: 500px; overflow: hidden; }
+    .header-img-wrap img { width: 100%; height: auto; object-fit: cover; display: block; }
 
-    /* === SLIDER === */
+    /* SLIDER */
     .slider {
       width: 90%;
       max-width: 450px;
@@ -54,30 +45,22 @@
       touch-action: pan-y;
       user-select: none;
     }
-    .slides {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.8s ease-in-out;
-    }
-    .slides img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      flex-shrink: 0;
-      cursor: grab;
-      display: block;
-    }
+    .slides { display: flex; width: 100%; height: 100%; transition: transform 0.8s ease-in-out; }
+    .slides img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; cursor: grab; display: block; }
 
-    /* === CIRCLES === */
+    /* CIRCLES + INPUTS */
     .circle-container {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
       width: 100%;
-      padding-left: 20px;
       gap: 18px;
-      margin-top: 6px;
+      margin-top: 10px;
+      padding: 0 15px;
+    }
+    .circle-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     .circle {
       width: 50px;
@@ -86,15 +69,42 @@
       overflow: hidden;
       border: 2px solid #ddd;
       background: #fff;
+      flex-shrink: 0;
     }
-    .circle img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* INPUT / SELECT */
+    .input-box {
+      flex: 1;
+      height: 45px;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      padding: 0 15px;
+      font-size: 16px;
+      outline: none;
     }
 
-    /* === BUTTON === */
+    /* SIM OPTIONS */
+    .sim-options {
+      display: flex;
+      justify-content: space-between; /* spread equally */
+      flex: 1; /* take full width like input */
+    }
+    .sim {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: 0.3s;
+      flex-shrink: 0;
+    }
+    .sim img { width: 100%; height: 100%; object-fit: cover; }
+    .sim:hover { transform: scale(1.1); }
+    .sim.active { border-color: #ff3c3c; }
+
+    /* BUTTON */
     .btn {
       display: block;
       width: 85%;
@@ -116,13 +126,12 @@
 <body>
   <div class="container">
 
-    <!-- === HEADER IMAGE === -->
+    <!-- HEADER -->
     <div class="header-img-wrap">
-      <!-- Yaha apni header image link lagao -->
-      <img src="https://i.ibb.co/XcqvpcM/Picsart-25-09-11-08-09-50-809.jpg/800/120?random=99" alt="Top Header Image">
+      <img src="https://i.ibb.co/XcqvpcM/Picsart-25-09-11-08-09-50-809.jpg" alt="Top Header Image">
     </div>
 
-    <!-- === SLIDER === -->
+    <!-- SLIDER -->
     <div class="slider">
       <div class="slides">
         <img src="https://picsum.photos/1280/720?random=4" alt="clone-last">
@@ -134,19 +143,56 @@
       </div>
     </div>
 
-    <!-- === CIRCLES === -->
+    <!-- CIRCLES + INPUTS -->
     <div class="circle-container">
-      <div class="circle"><img src="https://i.ibb.co/Pvkm0j95/New-Project-3-F9-FDC3-B.png/200?random=10" alt="Circle 1"></div>
-      <div class="circle"><img src="https://i.ibb.co/x8HdwFcR/New-Project-3-222-F2-CB.png/200?random=11" alt="Circle 2"></div>
-      <div class="circle"><img src="https://i.ibb.co/bgNvgyDg/New-Project-3-7-B39-B3-D.png/200?random=12" alt="Circle 3"></div>
-      <div class="circle"><img src="https://i.ibb.co/wFmHPBHF/New-Project-3-05-CBCF6.png/200?random=13" alt="Circle 4"></div>
+
+      <!-- 1. Mobile Input -->
+      <div class="circle-row">
+        <div class="circle"><img src="https://i.ibb.co/Pvkm0j95/New-Project-3-F9-FDC3-B.png" alt="Mobile"></div>
+        <input type="tel" maxlength="10" class="input-box" placeholder="Enter 10 digit mobile number">
+      </div>
+
+      <!-- 2. SIM Selection -->
+      <div class="circle-row">
+        <div class="circle"><img src="https://i.ibb.co/x8HdwFcR/New-Project-3-222-F2-CB.png" alt="SIM"></div>
+        <div class="sim-options">
+          <div class="sim"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Jio_Logo.png" alt="Jio"></div>
+          <div class="sim"><img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Airtel_logo_2010.png" alt="Airtel"></div>
+          <div class="sim"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Vi_logo_2020.png" alt="VI"></div>
+          <div class="sim"><img src="https://upload.wikimedia.org/wikipedia/commons/1/16/BSNL_logo.svg" alt="BSNL"></div>
+        </div>
+      </div>
+
+      <!-- 3. Plan Selection -->
+      <div class="circle-row">
+        <div class="circle"><img src="https://i.ibb.co/bgNvgyDg/New-Project-3-7-B39-B3-D.png" alt="Plan"></div>
+        <select class="input-box">
+          <option>Select Plan</option>
+          <option>₹199 - 1GB/day</option>
+          <option>₹399 - 1.5GB/day</option>
+          <option>₹599 - 2GB/day</option>
+        </select>
+      </div>
+
+      <!-- 4. Circle/Region Selection -->
+      <div class="circle-row">
+        <div class="circle"><img src="https://i.ibb.co/wFmHPBHF/New-Project-3-05-CBCF6.png" alt="Circle"></div>
+        <select class="input-box">
+          <option>Select Circle</option>
+          <option>UP East</option>
+          <option>Punjab</option>
+          <option>Maharashtra</option>
+          <option>Delhi</option>
+        </select>
+      </div>
     </div>
 
-    <!-- === BUTTON === -->
+    <!-- BUTTON -->
     <button class="btn">Recharge Now</button>
   </div>
 
   <script>
+    /* SLIDER SCRIPT */
     const slides = document.querySelector('.slides');
     const slideImages = document.querySelectorAll('.slides img');
     let index = 1;
@@ -192,7 +238,15 @@
     document.querySelectorAll('.slides img').forEach(img => {
       img.addEventListener('dragstart', e => e.preventDefault());
     });
+
+    /* SIM SELECTION SCRIPT */
+    const sims = document.querySelectorAll('.sim');
+    sims.forEach(sim => {
+      sim.addEventListener('click', () => {
+        sims.forEach(s => s.classList.remove('active'));
+        sim.classList.add('active');
+      });
+    });
   </script>
 </body>
-</html>
-
+  </html>
