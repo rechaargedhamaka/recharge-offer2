@@ -27,11 +27,9 @@
       padding-bottom: 20px;
     }
 
-    /* HEADER IMAGE */
     .header-img-wrap { width: 100%; max-width: 500px; overflow: hidden; }
     .header-img-wrap img { width: 100%; height: auto; object-fit: cover; display: block; }
 
-    /* SLIDER */
     .slider {
       width: 90%;
       max-width: 450px;
@@ -42,13 +40,10 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.15);
       background: #000;
       margin: 20px auto;
-      touch-action: pan-y;
-      user-select: none;
     }
     .slides { display: flex; width: 100%; height: 100%; transition: transform 0.8s ease-in-out; }
     .slides img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; cursor: grab; display: block; }
 
-    /* CIRCLES + INPUTS */
     .circle-container {
       display: flex;
       flex-direction: column;
@@ -57,11 +52,7 @@
       margin-top: 10px;
       padding: 0 15px;
     }
-    .circle-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .circle-row { display: flex; align-items: center; gap: 10px; }
     .circle {
       width: 50px;
       height: 50px;
@@ -73,7 +64,6 @@
     }
     .circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* INPUT / SELECT */
     .input-box {
       flex: 1;
       height: 45px;
@@ -82,14 +72,12 @@
       padding: 0 15px;
       font-size: 16px;
       outline: none;
-      box-sizing: border-box;
     }
 
-    /* SIM OPTIONS */
     .sim-options {
       display: flex;
-      justify-content: space-between; /* spread equally */
-      flex: 1; /* take full width like input */
+      justify-content: space-between;
+      flex: 1;
     }
     .sim {
       width: 55px;
@@ -99,13 +87,11 @@
       border: 2px solid transparent;
       cursor: pointer;
       transition: 0.3s;
-      flex-shrink: 0;
     }
     .sim img { width: 100%; height: 100%; object-fit: cover; }
     .sim:hover { transform: scale(1.1); }
     .sim.active { border-color: #ff3c3c; }
 
-    /* BUTTON */
     .btn {
       display: block;
       width: 85%;
@@ -126,8 +112,6 @@
 </head>
 <body>
   <div class="container">
-
-    <!-- HEADER -->
     <div class="header-img-wrap">
       <img src="https://i.ibb.co/XcqvpcM/Picsart-25-09-11-08-09-50-809.jpg" alt="Top Header Image">
     </div>
@@ -146,14 +130,13 @@
 
     <!-- CIRCLES + INPUTS -->
     <div class="circle-container">
-
-      <!-- 1. Mobile Input -->
+      <!-- Mobile Input -->
       <div class="circle-row">
         <div class="circle"><img src="https://i.ibb.co/Pvkm0j95/New-Project-3-F9-FDC3-B.png" alt="Mobile"></div>
         <input type="tel" maxlength="10" id="mobile" class="input-box" placeholder="Enter 10 digit mobile number">
       </div>
 
-      <!-- 2. SIM Selection -->
+      <!-- SIM Selection -->
       <div class="circle-row">
         <div class="circle"><img src="https://i.ibb.co/x8HdwFcR/New-Project-3-222-F2-CB.png" alt="SIM"></div>
         <div class="sim-options" id="simOptions">
@@ -164,18 +147,15 @@
         </div>
       </div>
 
-      <!-- 3. Plan Selection -->
+      <!-- Plan Selection -->
       <div class="circle-row">
         <div class="circle"><img src="https://i.ibb.co/bgNvgyDg/New-Project-3-7-B39-B3-D.png" alt="Plan"></div>
         <select id="plan" class="input-box">
-          <option>Select Plan</option>
-          <option>₹199 - 1GB/day</option>
-          <option>₹399 - 1.5GB/day</option>
-          <option>₹599 - 2GB/day</option>
+          <option>Select SIM first</option>
         </select>
       </div>
 
-      <!-- 4. Circle/Region Selection -->
+      <!-- Circle Selection -->
       <div class="circle-row">
         <div class="circle"><img src="https://i.ibb.co/wFmHPBHF/New-Project-3-05-CBCF6.png" alt="Circle"></div>
         <select id="circle" class="input-box">
@@ -188,66 +168,36 @@
       </div>
     </div>
 
-    <!-- BUTTON -->
     <button class="btn" id="rechargeBtn">Recharge Now</button>
   </div>
 
   <script>
-    /* SLIDER SCRIPT */
-    const slides = document.querySelector('.slides');
-    const slideImages = document.querySelectorAll('.slides img');
-    let index = 1;
-    const totalSlides = slideImages.length;
+    /* SIM PLANS LIST */
+    const simPlans = {
+      "Jio": ["₹199 - 1GB/day", "₹399 - 1.5GB/day", "₹666 - 2GB/day"],
+      "Airtel": ["₹209 - 1GB/day", "₹479 - 1.5GB/day", "₹599 - 2GB/day"],
+      "VI": ["₹249 - 1GB/day", "₹399 - 1.5GB/day", "₹699 - 2GB/day"],
+      "BSNL": ["₹187 - 1GB/day", "₹397 - 2GB/day", "₹797 - 2GB/day"]
+    };
 
-    slides.style.transform = `translateX(${-index * 100}%)`;
-
-    function updateSlider(animate = true) {
-      slides.style.transition = animate ? "transform 0.8s ease-in-out" : "none";
-      slides.style.transform = `translateX(${-index * 100}%)`;
-    }
-    function nextSlide() { index++; updateSlider(true); }
-    function prevSlide() { index--; updateSlider(true); }
-
-    slides.addEventListener('transitionend', () => {
-      if (index === totalSlides - 1) { index = 1; updateSlider(false); }
-      else if (index === 0) { index = totalSlides - 2; updateSlider(false); }
-    });
-
-    let autoSlide = setInterval(nextSlide, 8000);
-    const sliderEl = document.querySelector('.slider');
-    sliderEl.addEventListener('mouseenter', () => clearInterval(autoSlide));
-    sliderEl.addEventListener('mouseleave', () => {
-      clearInterval(autoSlide);
-      autoSlide = setInterval(nextSlide, 8000);
-    });
-
-    let startX = 0, isDragging = false;
-    slides.addEventListener('mousedown', e => { isDragging = true; startX = e.pageX; });
-    window.addEventListener('mouseup', e => {
-      if (!isDragging) return;
-      const diff = e.pageX - startX;
-      if (diff > 50) prevSlide();
-      else if (diff < -50) nextSlide();
-      isDragging = false;
-    });
-    slides.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
-    slides.addEventListener('touchend', e => {
-      const diff = e.changedTouches[0].clientX - startX;
-      if (diff > 50) prevSlide();
-      else if (diff < -50) nextSlide();
-    });
-    document.querySelectorAll('.slides img').forEach(img => {
-      img.addEventListener('dragstart', e => e.preventDefault());
-    });
-
-    /* SIM SELECTION SCRIPT */
+    /* SIM SELECTION */
     const sims = document.querySelectorAll('.sim');
     let selectedSim = "";
+    const planSelect = document.getElementById("plan");
+
     sims.forEach(sim => {
       sim.addEventListener('click', () => {
         sims.forEach(s => s.classList.remove('active'));
         sim.classList.add('active');
         selectedSim = sim.dataset.sim;
+
+        // Update Plan Dropdown
+        planSelect.innerHTML = "<option>Select Plan</option>";
+        simPlans[selectedSim].forEach(p => {
+          const opt = document.createElement("option");
+          opt.textContent = p;
+          planSelect.appendChild(opt);
+        });
       });
     });
 
@@ -266,13 +216,11 @@
         return;
       }
 
-      // Save to localStorage
       localStorage.setItem("mobile", mobile);
       localStorage.setItem("plan", plan);
       localStorage.setItem("circle", circle);
       localStorage.setItem("sim", selectedSim);
 
-      // Redirect
       window.location.href = "payment.html";
     });
   </script>
