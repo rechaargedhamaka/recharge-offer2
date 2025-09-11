@@ -82,6 +82,7 @@
       padding: 0 15px;
       font-size: 16px;
       outline: none;
+      box-sizing: border-box;
     }
 
     /* SIM OPTIONS */
@@ -149,24 +150,24 @@
       <!-- 1. Mobile Input -->
       <div class="circle-row">
         <div class="circle"><img src="https://i.ibb.co/Pvkm0j95/New-Project-3-F9-FDC3-B.png" alt="Mobile"></div>
-        <input type="tel" maxlength="10" class="input-box" placeholder="Enter 10 digit mobile number">
+        <input type="tel" maxlength="10" id="mobile" class="input-box" placeholder="Enter 10 digit mobile number">
       </div>
 
       <!-- 2. SIM Selection -->
       <div class="circle-row">
         <div class="circle"><img src="https://i.ibb.co/x8HdwFcR/New-Project-3-222-F2-CB.png" alt="SIM"></div>
-        <div class="sim-options">
-          <div class="sim"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Jio_Logo.png" alt="Jio"></div>
-          <div class="sim"><img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Airtel_logo_2010.png" alt="Airtel"></div>
-          <div class="sim"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Vi_logo_2020.png" alt="VI"></div>
-          <div class="sim"><img src="https://upload.wikimedia.org/wikipedia/commons/1/16/BSNL_logo.svg" alt="BSNL"></div>
+        <div class="sim-options" id="simOptions">
+          <div class="sim" data-sim="Jio"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Jio_Logo.png" alt="Jio"></div>
+          <div class="sim" data-sim="Airtel"><img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Airtel_logo_2010.png" alt="Airtel"></div>
+          <div class="sim" data-sim="VI"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Vi_logo_2020.png" alt="VI"></div>
+          <div class="sim" data-sim="BSNL"><img src="https://upload.wikimedia.org/wikipedia/commons/1/16/BSNL_logo.svg" alt="BSNL"></div>
         </div>
       </div>
 
       <!-- 3. Plan Selection -->
       <div class="circle-row">
         <div class="circle"><img src="https://i.ibb.co/bgNvgyDg/New-Project-3-7-B39-B3-D.png" alt="Plan"></div>
-        <select class="input-box">
+        <select id="plan" class="input-box">
           <option>Select Plan</option>
           <option>₹199 - 1GB/day</option>
           <option>₹399 - 1.5GB/day</option>
@@ -177,7 +178,7 @@
       <!-- 4. Circle/Region Selection -->
       <div class="circle-row">
         <div class="circle"><img src="https://i.ibb.co/wFmHPBHF/New-Project-3-05-CBCF6.png" alt="Circle"></div>
-        <select class="input-box">
+        <select id="circle" class="input-box">
           <option>Select Circle</option>
           <option>UP East</option>
           <option>Punjab</option>
@@ -188,7 +189,7 @@
     </div>
 
     <!-- BUTTON -->
-    <button class="btn">Recharge Now</button>
+    <button class="btn" id="rechargeBtn">Recharge Now</button>
   </div>
 
   <script>
@@ -241,12 +242,39 @@
 
     /* SIM SELECTION SCRIPT */
     const sims = document.querySelectorAll('.sim');
+    let selectedSim = "";
     sims.forEach(sim => {
       sim.addEventListener('click', () => {
         sims.forEach(s => s.classList.remove('active'));
         sim.classList.add('active');
+        selectedSim = sim.dataset.sim;
       });
+    });
+
+    /* SAVE DATA + REDIRECT */
+    document.getElementById("rechargeBtn").addEventListener("click", () => {
+      const mobile = document.getElementById("mobile").value.trim();
+      const plan = document.getElementById("plan").value;
+      const circle = document.getElementById("circle").value;
+
+      if (mobile.length !== 10) {
+        alert("Enter valid 10 digit mobile number");
+        return;
+      }
+      if (plan === "Select Plan" || circle === "Select Circle" || selectedSim === "") {
+        alert("Please select SIM, Plan and Circle");
+        return;
+      }
+
+      // Save to localStorage
+      localStorage.setItem("mobile", mobile);
+      localStorage.setItem("plan", plan);
+      localStorage.setItem("circle", circle);
+      localStorage.setItem("sim", selectedSim);
+
+      // Redirect
+      window.location.href = "payment.html";
     });
   </script>
 </body>
-  </html>
+</html>
