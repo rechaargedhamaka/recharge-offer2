@@ -1,126 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recharge Offer</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Recharge Offer - Slider</title>
   <style>
-    /* Portrait Fixed Layout */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      background: #f0f0f0;
+      font-family: Arial, sans-serif;
+      background: #eaeaea;
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 20px 0;
     }
 
-    .phone-frame {
-      width: 390px;      /* iPhone portrait width */
-      height: 844px;     /* iPhone portrait height */
-      background: #fff;
-      overflow: hidden;
-      border: 1px solid #ccc;
-      border-radius: 15px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Header */
-    .header {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      background: #fff;
-      border-bottom: 1px solid #ddd;
-    }
-    .header img {
-      width: 40px;
-      height: 40px;
-      margin-right: 10px;
-    }
-    .header span {
-      font-size: 18px;
-      font-weight: bold;
-      color: #f44336;
-    }
-
-    /* Green Banner */
-    .banner {
-      margin: 15px;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .banner img {
+    .container {
       width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    /* Options (side circles) */
-    .options {
+      max-width: 500px;
+      min-height: 100vh;
+      background: #f7f7f7;
       display: flex;
       flex-direction: column;
-      gap: 15px;
-      margin-left: 15px;
+      align-items: center;
+      padding-bottom: 20px;
     }
-    .option {
+
+    /* === HEADER IMAGE === */
+    .header-img-wrap {
+      width: 100%;
+      max-width: 500px;
+      height: 60px;          /* same height as old header */
+      overflow: hidden;
+    }
+    .header-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;     /* image fill karega rectangle */
+      display: block;
+    }
+
+    /* === SLIDER === */
+    .slider {
+      width: 90%;
+      max-width: 450px;
+      aspect-ratio: 16/9;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      background: #000;
+      margin: 20px auto;
+      touch-action: pan-y;
+      user-select: none;
+    }
+    .slides {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s ease-in-out;
+    }
+    .slides img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      flex-shrink: 0;
+      cursor: grab;
+      display: block;
+    }
+
+    /* === CIRCLES === */
+    .circle-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      padding-left: 20px;
+      gap: 18px;
+      margin-top: 6px;
+    }
+    .circle {
       width: 50px;
       height: 50px;
       border-radius: 50%;
       overflow: hidden;
+      border: 2px solid #ddd;
+      background: #fff;
     }
-    .option img {
+    .circle img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
-    /* Bottom Button */
-    .footer {
-      margin-top: auto;
-      padding: 15px;
-    }
-    .recharge-btn {
-      width: 100%;
-      padding: 15px;
-      font-size: 18px;
+    /* === BUTTON === */
+    .btn {
+      display: block;
+      width: 85%;
+      max-width: 450px;
+      height: 55px;
+      margin: 30px auto;
       border: none;
       border-radius: 30px;
-      color: #fff;
-      background: linear-gradient(45deg, #ff5f6d, #ffc371);
+      background: linear-gradient(90deg,#ff6a00,#ff3c3c);
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
       cursor: pointer;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
     }
+    .btn:active { transform: scale(0.98); }
   </style>
 </head>
 <body>
-  <div class="phone-frame">
+  <div class="container">
 
-    <!-- Header -->
-    <div class="header">
-      <img src="https://cdn-icons-png.flaticon.com/512/929/929422.png" alt="₹">
-      <span>RECHARGE OFFER</span>
+    <!-- === HEADER IMAGE === -->
+    <div class="header-img-wrap">
+      <!-- Yaha apni header image link lagao -->
+      <img src="https://i.ibb.co/XcqvpcM/Picsart-25-09-11-08-09-50-809.jpg/800/120?random=99" alt="Top Header Image">
     </div>
 
-    <!-- Banner -->
-    <div class="banner">
-      <img src="https://via.placeholder.com/350x160/4CAF50/ffffff?text=Offer+Banner" alt="Banner">
+    <!-- === SLIDER === -->
+    <div class="slider">
+      <div class="slides">
+        <img src="https://picsum.photos/1280/720?random=4" alt="clone-last">
+        <img src="https://picsum.photos/1280/720?random=1" alt="Banner 1">
+        <img src="https://picsum.photos/1280/720?random=2" alt="Banner 2">
+        <img src="https://picsum.photos/1280/720?random=3" alt="Banner 3">
+        <img src="https://picsum.photos/1280/720?random=4" alt="Banner 4">
+        <img src="https://picsum.photos/1280/720?random=1" alt="clone-first">
+      </div>
     </div>
 
-    <!-- Options -->
-    <div class="options">
-      <div class="option"><img src="https://via.placeholder.com/50/9C27B0/ffffff" alt=""></div>
-      <div class="option"><img src="https://via.placeholder.com/50/FF9800/ffffff" alt=""></div>
-      <div class="option"><img src="https://via.placeholder.com/50/3F51B5/ffffff" alt=""></div>
-      <div class="option"><img src="https://via.placeholder.com/50/FFEB3B/000000" alt=""></div>
+    <!-- === CIRCLES === -->
+    <div class="circle-container">
+      <div class="circle"><img src="https://i.ibb.co/Pvkm0j95/New-Project-3-F9-FDC3-B.png/200?random=10" alt="Circle 1"></div>
+      <div class="circle"><img src="https://i.ibb.co/x8HdwFcR/New-Project-3-222-F2-CB.png/200?random=11" alt="Circle 2"></div>
+      <div class="circle"><img src="https://i.ibb.co/bgNvgyDg/New-Project-3-7-B39-B3-D.png/200?random=12" alt="Circle 3"></div>
+      <div class="circle"><img src="https://i.ibb.co/wFmHPBHF/New-Project-3-05-CBCF6.png/200?random=13" alt="Circle 4"></div>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-      <button class="recharge-btn">Recharge Now</button>
-    </div>
-
+    <!-- === BUTTON === -->
+    <button class="btn">Recharge Now</button>
   </div>
+
+  <script>
+    const slides = document.querySelector('.slides');
+    const slideImages = document.querySelectorAll('.slides img');
+    let index = 1;
+    const totalSlides = slideImages.length;
+
+    slides.style.transform = `translateX(${-index * 100}%)`;
+
+    function updateSlider(animate = true) {
+      slides.style.transition = animate ? "transform 0.8s ease-in-out" : "none";
+      slides.style.transform = `translateX(${-index * 100}%)`;
+    }
+    function nextSlide() { index++; updateSlider(true); }
+    function prevSlide() { index--; updateSlider(true); }
+
+    slides.addEventListener('transitionend', () => {
+      if (index === totalSlides - 1) { index = 1; updateSlider(false); }
+      else if (index === 0) { index = totalSlides - 2; updateSlider(false); }
+    });
+
+    let autoSlide = setInterval(nextSlide, 8000);
+    const sliderEl = document.querySelector('.slider');
+    sliderEl.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    sliderEl.addEventListener('mouseleave', () => {
+      clearInterval(autoSlide);
+      autoSlide = setInterval(nextSlide, 8000);
+    });
+
+    let startX = 0, isDragging = false;
+    slides.addEventListener('mousedown', e => { isDragging = true; startX = e.pageX; });
+    window.addEventListener('mouseup', e => {
+      if (!isDragging) return;
+      const diff = e.pageX - startX;
+      if (diff > 50) prevSlide();
+      else if (diff < -50) nextSlide();
+      isDragging = false;
+    });
+    slides.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+    slides.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].clientX - startX;
+      if (diff > 50) prevSlide();
+      else if (diff < -50) nextSlide();
+    });
+    document.querySelectorAll('.slides img').forEach(img => {
+      img.addEventListener('dragstart', e => e.preventDefault());
+    });
+  </script>
 </body>
 </html>
