@@ -60,6 +60,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      min-width: 0;  /* 👈 fix: allow shrinking */
     }
     .circle {
       width: 50px;
@@ -74,7 +75,8 @@
 
     /* INPUT / SELECT */
     .input-box {
-      flex: 1;
+      flex: 1 1 auto;   /* 👈 fix: flex item shrink+grow */
+      width: 100%;      /* 👈 fix: full responsive width */
       height: 45px;
       border: 1px solid #ccc;
       border-radius: 25px;
@@ -85,7 +87,13 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      
+    }
+
+    /* select options also truncated */
+    select.input-box option {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* SIM OPTIONS */
@@ -93,6 +101,7 @@
       display: flex;
       justify-content: space-between;
       flex: 1;
+      min-width: 0; /* 👈 fix */
     }
     .sim {
       width: 55px;
@@ -139,7 +148,7 @@
     <div class="slider">
       <div class="slides">
         <img src="https://picsum.photos/1280/720?random=4" alt="clone-last">
-        <img src="https://i.ibb.co/6V4qkwg/Screenshot-20250912-141213-Gallery.jpg/1280/720?random=1" alt="Banner 1">
+        <img src="https://i.ibb.co/6V4qkwg/Screenshot-20250912-141213-Gallery.jpg" alt="Banner 1">
         <img src="https://picsum.photos/1280/720?random=2" alt="Banner 2">
         <img src="https://picsum.photos/1280/720?random=3" alt="Banner 3">
         <img src="https://picsum.photos/1280/720?random=4" alt="Banner 4">
@@ -180,30 +189,30 @@
         <div class="circle"><img src="https://i.ibb.co/wFmHPBHF/New-Project-3-05-CBCF6.png" alt="Circle"></div>
         <select id="circle" class="input-box">
           <option>Select Circle</option>
-  <option>Andhra Pradesh & Telangana</option>
-  <option>Assam</option>
-  <option>Bihar & Jharkhand</option>
-  <option>Chennai</option>
-  <option>Delhi & NCR</option>
-  <option>Gujarat</option>
-  <option>Haryana</option>
-  <option>Himachal Pradesh</option>
-  <option>Jammu & Kashmir</option>
-  <option>Karnataka</option>
-  <option>Kerala</option>
-  <option>Kolkata</option>
-  <option>Madhya Pradesh & Chhattisgarh</option>
-  <option>Maharashtra & Goa</option>
-  <option>Mumbai</option>
-  <option>North East</option>
-  <option>Odisha</option>
-  <option>Punjab</option>
-  <option>Rajasthan</option>
-  <option>Tamil Nadu</option>
-  <option>Uttar Pradesh East</option>
-  <option>Uttar Pradesh West & Uttarakhand</option>
-  <option>West Bengal</option>
-          </select>
+          <option>Andhra Pradesh & Telangana</option>
+          <option>Assam</option>
+          <option>Bihar & Jharkhand</option>
+          <option>Chennai</option>
+          <option>Delhi & NCR</option>
+          <option>Gujarat</option>
+          <option>Haryana</option>
+          <option>Himachal Pradesh</option>
+          <option>Jammu & Kashmir</option>
+          <option>Karnataka</option>
+          <option>Kerala</option>
+          <option>Kolkata</option>
+          <option>Madhya Pradesh & Chhattisgarh</option>
+          <option>Maharashtra & Goa</option>
+          <option>Mumbai</option>
+          <option>North East</option>
+          <option>Odisha</option>
+          <option>Punjab</option>
+          <option>Rajasthan</option>
+          <option>Tamil Nadu</option>
+          <option>Uttar Pradesh East</option>
+          <option>Uttar Pradesh West & Uttarakhand</option>
+          <option>West Bengal</option>
+        </select>
       </div>
     </div>   
     
@@ -315,17 +324,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
