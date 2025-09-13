@@ -45,7 +45,8 @@
       user-select: none;
     }
     .slides { display: flex; width: 100%; height: 100%; transition: transform 0.8s ease-in-out; }
-    .slides img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; cursor: grab; display: block; }
+    .slide-box { flex: 0 0 100%; height: 100%; }
+    .slide-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     /* CIRCLES + INPUTS */
     .circle-container {
@@ -60,7 +61,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      min-width: 0;  /* 👈 fix: allow shrinking */
+      min-width: 0;
     }
     .circle {
       width: 50px;
@@ -75,8 +76,8 @@
 
     /* INPUT / SELECT */
     .input-box {
-      flex: 1 1 auto;   /* 👈 fix: flex item shrink+grow */
-      width: 100%;      /* 👈 fix: full responsive width */
+      flex: 1 1 auto;
+      width: 100%;
       height: 45px;
       border: 1px solid #ccc;
       border-radius: 25px;
@@ -89,7 +90,6 @@
       white-space: nowrap;
     }
 
-    /* select options also truncated */
     select.input-box option {
       white-space: nowrap;
       overflow: hidden;
@@ -101,7 +101,7 @@
       display: flex;
       justify-content: space-between;
       flex: 1;
-      min-width: 0; /* 👈 fix */
+      min-width: 0;
     }
     .sim {
       width: 55px;
@@ -147,9 +147,14 @@
     <!-- SLIDER -->
     <div class="slider">
       <div class="slides">
+        <!-- Clone Last -->
         <div class="slide-box"><img src="https://i.ibb.co/RkS1R02t/New-Project-2-7-C00813.png" alt="Clone Last"></div>
-        <img src="https://i.ibb.co/6V4qkwg/Screenshot-20250912-141213-Gallery.jpg" alt="Banner 1">
-        <img src="https://i.ibb.co/RkS1R02t/New-Project-2-7-C00813.png/1280/720?random=2" alt="Banner 2">
+        
+        <!-- Originals -->
+        <div class="slide-box"><img src="https://i.ibb.co/6V4qkwg/Screenshot-20250912-141213-Gallery.jpg" alt="Banner 1"></div>
+        <div class="slide-box"><img src="https://i.ibb.co/RkS1R02t/New-Project-2-7-C00813.png" alt="Banner 2"></div>
+        
+        <!-- Clone First -->
         <div class="slide-box"><img src="https://i.ibb.co/6V4qkwg/Screenshot-20250912-141213-Gallery.jpg" alt="Clone First"></div>
       </div>
     </div>
@@ -221,9 +226,9 @@
   <script>
     /* SLIDER SCRIPT */
     const slides = document.querySelector('.slides');
-    const slideImages = document.querySelectorAll('.slides img');
+    const slideBoxes = document.querySelectorAll('.slide-box');
     let index = 1;
-    const totalSlides = slideImages.length;
+    const totalSlides = slideBoxes.length;
 
     slides.style.transform = `translateX(${-index * 100}%)`;
 
@@ -321,9 +326,4 @@
     });
   </script>
 </body>
-</html>
-
-
-
-
-
+  </html>
